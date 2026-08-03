@@ -1,0 +1,74 @@
+# Travelling Salesman Problem
+
+from sys import maxsize
+from itertools import permutations
+# Function to solve TSP
+def travellingSalesmanProblem(graph, s):
+    v = len(graph)
+    # Edge Case: One-City TSP
+    if v == 1:
+        return 0
+    vertex = []
+    for i in range(v):
+        if i != s:
+            vertex.append(i)
+    min_path = maxsize
+    next_permutation = permutations(vertex)
+    for i in next_permutation:
+        current_pathweight = 0
+        k = s
+        for j in i:
+            current_pathweight += graph[k][j]
+            k = j
+        current_pathweight += graph[k][s]
+        min_path = min (min_path, current_pathweight)
+    return min_path
+
+
+# case-1: Small Complete Graph
+print("TEST CASE 1: Small Complete Graph")
+
+graph1 = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 30],
+    [20, 25, 30, 0]
+]
+
+result1 = travellingSalesmanProblem(graph1, 0)
+print("Minimum Tour Cost =", result1)
+
+# case-2: Triangle Graph
+print("\nTEST CASE 2: Triangle Graph")
+
+graph2 = [
+    [0, 5, 10],
+    [5, 0, 8],
+    [10, 8, 0]
+]
+
+result2 = travellingSalesmanProblem(graph2, 0)
+print("Minimum Tour Cost =", result2)
+
+# case-3: Bipartite Graph
+print("\nTEST CASE 3: Bipartite Graph")
+
+graph3 = [
+    [0, 4, 6, 8],
+    [4, 0, 5, 7],
+    [6, 5, 0, 3],
+    [8, 7, 3, 0]
+]
+
+result3 = travellingSalesmanProblem(graph3, 0)
+print("Minimum Tour Cost =", result3)
+
+# case-4: One-City TSP (Failure / Edge)
+print("\nTEST CASE 4: One-City TSP")
+
+graph4 = [
+    [0]
+]
+
+result4 = travellingSalesmanProblem(graph4, 0)
+print("Minimum Tour Cost =", result4)
