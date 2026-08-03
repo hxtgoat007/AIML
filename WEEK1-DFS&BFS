@@ -1,0 +1,82 @@
+from collections import deque
+# BFS Logic:
+def bfs(graph, start):
+    visited=set()
+    queue = deque([start])   
+    traversed = []
+    visited.add(start)
+    while queue :
+        node = queue.popleft()
+        traversed.append(node)
+        for neigh in graph[node]:
+            if neigh not in visited:
+                visited.add(neigh)
+                queue.append(neigh)
+    return traversed
+# DFS Logic
+def dfs(graph, start) :
+    visited= set()
+    traversed = []
+    def dfs_in(node) :
+        visited.add(node)
+        traversed.append(node)
+        for neigh in graph[node]:
+            if neigh not in visited:
+                dfs_in(neigh)
+    dfs_in(start)
+    return traversed
+
+# TEST CASES:
+# case-1: Connective Graph
+graph1 = {
+    'A':['B','C'],
+    'B':['A','D'],
+    'C':['A','E'],
+    'D':['B'],
+    'E':['C']
+    }
+# case-2: Multiple Branch Graph
+graph2={
+    'A':['B','C','D'],
+    'B':['A','E','F'],
+    'C':['A','G'],
+    'D':['A','H'],
+    'E':['B'],
+    'F':['B'],
+    'G':['C'],
+    'H':['D']
+}
+# case-3: Cyclic Graph
+graph3={
+    'A':['B','D'],
+    'B':['A','C','D'],
+    'C':['B','D'],
+    'D':['A','B','C']
+}
+# case-4: Single Node Graph
+graph4={
+    'A':[]
+}
+# case-5: Disconnected Graph
+graph5={
+    'A':['B'],
+    'B':['A','C'],
+    'C':['B'],
+    'D':['E'],
+    'E':['D']
+}
+
+# OUTPUTS:
+print("<--------------BFS-------------->")
+print("Graph-1: Connective: ",bfs(graph1, 'A'))
+print("Graph-2: Mulpiple Branches: ",bfs(graph2, 'A'))
+print("Graph-3: Cyclic: ",bfs(graph3, 'A'))
+print("Graph-4: Single Node: ",bfs(graph4, 'A'))
+print("Graph-5: Disconnective: ",bfs(graph5, 'A'))
+
+print("<--------------DFS-------------->")
+print("Graph-1: Connective: ",dfs(graph1, 'A'))
+print("Graph-2: Mulpiple Branches: ",dfs(graph2, 'A'))
+print("Graph-3: Cyclic: ",dfs(graph3, 'A'))
+print("Graph-4: Single Node: ",dfs(graph4, 'A'))
+print("Graph-5: Disconnective: ",dfs(graph5, 'A'))
