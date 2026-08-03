@@ -1,0 +1,68 @@
+# Graph Coloring Problem
+
+# Available colors
+colors = ['Red', 'Blue', 'Green']
+# Dictionary to store assigned colors
+colors_of_states = {}
+# Check whether a color can be assigned
+def promising(state, color, neighbors):
+    for neighbor in neighbors.get(state):
+        color_of_neighbor = colors_of_states.get(neighbor)
+        if color_of_neighbor == color:
+            return False
+    return True
+# Assign color to a state
+def get_color_for_state(state, neighbors):
+    for color in colors:
+        if promising(state, color, neighbors):
+            return color
+    return None
+# Solve graph coloring
+def graph_coloring(states, neighbors):
+    colors_of_states.clear()
+    for state in states:
+        color = get_color_for_state(state, neighbors)
+        if color is None:
+            print("Coloring not possible")
+            return False
+        colors_of_states[state] = color
+    print("Valid Coloring: ", colors_of_states)
+    return True
+
+# case-1 : Triangle Graph
+print("TEST CASE 1 : Triangle Graph")
+
+states = ['A', 'B', 'C']
+neighbors = {
+    'A': ['B', 'C'],
+    'B': ['A', 'C'],
+    'C': ['A', 'B']
+}
+
+graph_coloring(states, neighbors)
+
+# case-2 : Bipartite Graph
+print("\nTEST CASE 2 : Bipartite Graph")
+
+states = ['A', 'B', 'C', 'D']
+neighbors = {
+    'A': ['C', 'D'],
+    'B': ['C', 'D'],
+    'C': ['A', 'B'],
+    'D': ['A', 'B']
+}
+
+graph_coloring(states, neighbors)
+
+# case-3 : Complete Graph K4 with 3 Colors
+print("\nTEST CASE 3 : Complete Graph K4 with 3 Colors")
+
+states = ['A', 'B', 'C', 'D']
+neighbors = {
+    'A': ['B', 'C', 'D'],
+    'B': ['A', 'C', 'D'],
+    'C': ['A', 'B', 'D'],
+    'D': ['A', 'B', 'C']
+}
+
+graph_coloring(states, neighbors)
