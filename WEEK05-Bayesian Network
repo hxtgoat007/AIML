@@ -100,5 +100,5 @@ try:
     validate_probability(invalid_prob)
 
 except Exception as e:
-    print("TC5: Invalid Probability > 1 (Failure/Edge)")
+    print("TC2: Invalid Probability > 1 (Failure/Edge)")
     print(f"Error: {e}\n")
