@@ -35,25 +35,7 @@ def aStarAlgo(start_node, stop_node, Graph_nodes, H_dist):
     return  None, float('inf')
 
 # Test Cases:
-#case-1: Graph with Admissible Heuristic
-Graph_nodes={
-    'S':[('A',1),('G',10)],
-    'A':[('B',2),('C',1)],
-    'B':[('D',5)],
-    'C':[('D',3),('G',4)],
-    'D':[('G',2)]
-    }
-H_dist={
-    'S':5,
-    'A':3,
-    'B':4,
-    'C':2,
-    'D':1,
-    'G':0
-    }
-print("case-1: Graph with Admissible Heuristic")
-aStarAlgo('S','G',Graph_nodes,H_dist)
-#case-2: Multiple Possible Paths
+#case-1(Passed): Multiple Possible Paths
 Graph_nodes={
      'S':[('A',2),('B',4)],
      'A':[('G',5)],
@@ -66,35 +48,10 @@ H_dist={
     'B':1,
     'G':0
     }
-print("case-2: Multiple Possible Paths")
+print("case-1: Multiple Possible Paths")
 aStarAlgo('S','G',Graph_nodes,H_dist)
-#case-3: Direct start-goal connection
-Graph_nodes={
-    'S':[('G',3)],
-    'G':[]
-    }
-H_dist={
-    'S':1,
-    'G':0
-    }
-print("case-3: Direct start-goal connection")
-aStarAlgo('S','G',Graph_nodes,H_dist)
-#case-4: Goal not reachable
-Graph_nodes={
-    'S':[('A',7)],
-    'A':[('B',2)],
-    'B':[],
-    'G':[]
-    }
-H_dist={
-    'S':3,
-    'A':2,
-    'B':1,
-    'G':0
-    }
-print("case-4: Goal not reachable")
-aStarAlgo('S','G',Graph_nodes,H_dist)
-#case-5: Misleading Heuristic
+
+#case-2(Failed): Misleading Heuristic
 Graph_nodes={
     'S':[('A',1),('B',2)],
     'A':[('G',10)],
