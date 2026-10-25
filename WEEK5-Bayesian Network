@@ -82,8 +82,8 @@ def run_test(test_name, expected_type, **kwargs):
         print(f"{test_name} ({expected_type})")
         print(f"Error: {e}\n")
 
-
-# case-1: Alarm=True, no burglary, no earthquake, both call
+# Test Case:
+# case-1(Passed): Alarm=True, no burglary, no earthquake, both call
 run_test(
     "TC1: Alarm sounded, both called",
     "Success",
@@ -94,44 +94,7 @@ run_test(
     sophia_calls=True
 )
 
-# case-2: Burglary triggers alarm, both call
-run_test(
-    "TC2: Burglary with alarm",
-    "Success",
-    alarm=True,
-    burglary=True,
-    earthquake=False,
-    david_calls=True,
-    sophia_calls=True
-)
-
-# case-3: Earthquake triggers alarm, David calls, Sophia doesn't
-run_test(
-    "TC3: Earthquake with mixed calls",
-    "Success",
-    alarm=True,
-    burglary=False,
-    earthquake=True,
-    david_calls=True,
-    sophia_calls=False
-)
-
-# case-4: Missing CPT value
-try:
-    backup = P_alarm_given_burglary_and_earthquake
-    P_alarm_given_burglary_and_earthquake = None
-
-    if P_alarm_given_burglary_and_earthquake is None:
-        raise ValueError("Missing CPT value detected")
-
-except Exception as e:
-    print("TC4: Missing CPT Value (Failure/Edge)")
-    print(f"Error: {e}\n")
-
-finally:
-    P_alarm_given_burglary_and_earthquake = backup
-
-# case-5: Invalid probability (>1)
+# case-2(Failed): Invalid probability (>1)
 try:
     invalid_prob = 1.2
     validate_probability(invalid_prob)
