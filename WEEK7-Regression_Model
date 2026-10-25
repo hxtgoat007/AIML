@@ -1,0 +1,130 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from google.colab import files
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+_______________________________________________________________
+
+# UPLOAD SALARY DATASET
+uploaded = files.upload()
+dataset = pd.read_csv('salary_Data.csv')
+print("========== SALARY DATASET ==========")
+print(dataset.head())
+print("\nNumber of rows:", len(dataset))
+_______________________________________________________________
+
+# PREPARE DATA
+X = dataset[['YearsExperience']].values
+y = dataset['Salary'].values
+
+
+# ============================================================
+# TEST CASE 1
+# SUCCESS - LINEAR DATA POINTS
+# Best-fit line should be generated
+# ============================================================
+
+print("\n")
+print("==============================================")
+print("TEST CASE 1: LINEAR DATA POINTS")
+print("==============================================")
+model1 = LinearRegression()
+model1.fit(X, y)
+slope1 = model1.coef_[0]
+intercept1 = model1.intercept_
+print("Slope:", slope1)
+print("Intercept:", intercept1)
+print("\nRegression Equation:")
+print("Salary =", slope1, "* YearsExperience +", intercept1)
+# Check whether model generated a line
+if slope1 != 0:
+    print("\nRESULT: PASS")
+    print("Best-fit regression line generated successfully.")
+else:
+    print("\nRESULT: FAIL")
+
+# ============================================================
+# TEST CASE 2
+# FAILURE / EDGE CASE
+# OUTLIER-HEAVY SALARY DATA
+#
+# Add an extreme salary value to the dataset.
+# ============================================================
+print("\n")
+print("==============================================")
+print("TEST CASE 2: OUTLIER-HEAVY DATA")
+print("==============================================")
+
+# Copy original salary values
+y5 = y.copy()
+# Find the highest salary and make it an extreme outlier
+highest_salary_index = np.argmax(y5)
+original_salary = y5[highest_salary_index]
+# Make salary 5 times larger
+y5[highest_salary_index] = original_salary * 5
+print("Original highest salary:", original_salary)
+print("Outlier salary:", y5[highest_salary_index])
+# Model without outlier
+normal_model = LinearRegression()
+normal_model.fit(X, y)
+normal_slope = normal_model.coef_[0]
+# Model with outlier
+outlier_model = LinearRegression()
+outlier_model.fit(X, y5)
+outlier_slope = outlier_model.coef_[0]
+print("\nSlope before outlier:", normal_slope)
+print("Slope after outlier:", outlier_slope)
+# Calculate predictions
+normal_prediction = normal_model.predict(X)
+outlier_prediction = outlier_model.predict(X)
+normal_mse = mean_squared_error(y, normal_prediction)
+
+# Compare original salaries with model trained on outlier data
+outlier_mse = mean_squared_error(y, outlier_prediction)
+print("\nMSE before outlier:", normal_mse)
+print("MSE after outlier:", outlier_mse)
+if outlier_mse > normal_mse:
+    print("\nRESULT: PASS")
+    print("Model error increased because of the outlier.")
+else:
+    print("\nRESULT: OUTLIER DID NOT INCREASE ERROR")
+
+
+# ============================================================
+# TRAINING DATA GRAPH
+# ============================================================
+plt.figure(figsize=(8, 5))
+
+plt.scatter(
+    X_train,
+    y_train,
+    color='red',
+    label='Training Data'
+)
+plt.plot(
+    X_train,
+    model2.predict(X_train),
+    color='blue',
+    label='Regression Line'
+)
+plt.title("Salary vs Years of Experience - Training Set")
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary")
+plt.legend()
+plt.show()
+
+
+# ============================================================
+# FINAL TEST SUMMARY
+#============================================================
+print("\n")
+print("================================================")
+print("             TEST CASE SUMMARY")
+print("================================================")
+
+print("Test Case 1 : Linear Data          -> Best-fit line")
+print("Test Case 2 : Outlier Data         -> Error increases")
+print("================================================")
+
