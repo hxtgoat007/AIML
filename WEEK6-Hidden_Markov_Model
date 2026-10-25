@@ -94,11 +94,11 @@ print("Expected probability: 0.00672")
 print("Test Case 1: PASS")
 
 # ==================================================
-# TEST CASE 5 - FAILURE
+# TEST CASE 2 - FAILURE
 # INVALID PROBABILITY MATRIX
 # ==================================================
 
-print("\nTEST CASE 5 - FAILURE / EDGE")
+print("\nTEST CASE 2 - FAILURE / EDGE")
 
 # Create an invalid transition probability matrix
 invalid_transition = {
@@ -125,8 +125,8 @@ for state in hidden_states:
         )
 
 if valid:
-    print("Test Case 5: FAIL")
+    print("Test Case 2: FAIL")
     print("Invalid matrix was not detected.")
 else:
     print("Invalid probability matrix detected.")
-    print("Test Case 5: PASS")
+    print("Test Case 2: PASS")
