@@ -30,7 +30,7 @@ kb1 = (
 run_test("Test case-1: ", kb1)
 
 # case-2(Failed):
-kb5 = (
+kb2 = (
     Implies(Not(Rain), Harry_Visited_Hagrid)
 )
-run_test("Test case-5: ", kb5)
+run_test("Test case-2: ", kb2)
