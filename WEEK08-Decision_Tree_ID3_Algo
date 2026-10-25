@@ -1,0 +1,86 @@
+from sklearn.tree import DecisionTreeClassifier 
+from sklearn.preprocessing 
+import LabelEncoder
+import pandas as pd
+________________________________________
+
+def prepare_data(data):
+  df = pd.DataFrame(data)
+  X = df.iloc[:, :-1]
+  y = df.iloc[:, -1]
+  encoders = {}
+  for col in X.columns: 
+    le = LabelEncoder()
+    X[col] = le.fit_transform(X[col])
+    encoders[col] = le
+  y_encoder = LabelEncoder()
+  y = y_encoder.fit_transform(y)
+  
+  return X, y, y_encoder
+________________________________________
+
+play_tennis = [
+  ["Sunny", "Hot", "High", "Weak", "No"],
+  ["Sunny", "Hot", "High", "Strong", "No"],
+  ["Overcast", "Hot", "High", "Weak", "Yes"],
+  ["Rain", "Mild", "High", "Weak", "Yes"],
+  ["Rain", "Cool", "Normal", "Weak", "Yes"],
+  ["Rain", "Cool", "Normal", "Strong", "No"],
+  ["Overcast", "Cool", "Normal", "Strong", "Yes"],
+  ["Sunny", "Mild", "High", "Weak", "No"],
+  ["Sunny", "Cool", "Normal", "Weak", "Yes"],
+  ["Rain", "Mild", "Normal", "Weak", "Yes"],
+  ["Sunny", "Mild", "Normal", "Strong", "Yes"],
+  ["Overcast", "Mild", "High", "Strong", "Yes"],
+  ["Overcast", "Hot", "Normal", "Weak", "Yes"],
+  ["Rain", "Mild", "High", "Strong", "No"]
+]
+________________________________________
+
+from sklearn.tree import export_text
+________________________________________
+
+def show_tree(model, feature_names, test_case): 
+  print("\n" + "="*50)
+  print(test_case)
+  print("="*50)
+  print(export_text(model, feature_names=feature_names))
+  print("Tree Depth :", model.get_depth())
+  print("No. of Leaves :", model.get_n_leaves())
+  print()
+________________________________________
+
+# =====================
+# TC 1: Passed
+# =====================
+model = DecisionTreeClassifier(criterion="entropy") model.fit(X, y)
+
+show_tree( model, ["Color"],
+"TEST CASE 1 : Clear Class Separation"
+)
+mixed_data = [
+["Young", "High", "Yes"],
+["Young", "Low", "No"],
+["Middle", "High", "Yes"],
+["Middle", "Low", "Yes"],
+["Old", "High", "Yes"],
+["Old", "Low", "No"]
+]
+X, y, encoder = prepare_data(mixed_data)
+
+# =====================
+# TC 2: Failed
+# =====================
+missing_data = [ 
+  ["Sunny", "Hot", "Yes"],
+  ["Rain", None, "No"],
+  ["Overcast", "Mild", "Yes"],
+  [None, "Cool", "Yes"],
+  ["Sunny", "Cool", "No"]
+]
+
+X, y, encoder = prepare_data(missing_data)
+model = DecisionTreeClassifier(criterion="entropy") model.fit(X, y)
+show_tree( model, ["Weather", "Temperature"], 
+  "TEST CASE 5 : Missing Attribute Value"
+)
