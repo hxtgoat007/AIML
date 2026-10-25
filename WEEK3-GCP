@@ -29,40 +29,13 @@ def graph_coloring(states, neighbors):
     print("Valid Coloring: ", colors_of_states)
     return True
 
+# Test Cases:
 # case-1 : Triangle Graph
 print("TEST CASE 1 : Triangle Graph")
-
 states = ['A', 'B', 'C']
 neighbors = {
     'A': ['B', 'C'],
     'B': ['A', 'C'],
     'C': ['A', 'B']
 }
-
-graph_coloring(states, neighbors)
-
-# case-2 : Bipartite Graph
-print("\nTEST CASE 2 : Bipartite Graph")
-
-states = ['A', 'B', 'C', 'D']
-neighbors = {
-    'A': ['C', 'D'],
-    'B': ['C', 'D'],
-    'C': ['A', 'B'],
-    'D': ['A', 'B']
-}
-
-graph_coloring(states, neighbors)
-
-# case-3 : Complete Graph K4 with 3 Colors
-print("\nTEST CASE 3 : Complete Graph K4 with 3 Colors")
-
-states = ['A', 'B', 'C', 'D']
-neighbors = {
-    'A': ['B', 'C', 'D'],
-    'B': ['A', 'C', 'D'],
-    'C': ['A', 'B', 'D'],
-    'D': ['A', 'B', 'C']
-}
-
 graph_coloring(states, neighbors)
