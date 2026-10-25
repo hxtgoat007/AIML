@@ -64,5 +64,5 @@ H_dist={
     'B':100,
     'G':0
     }
-print("case-5: Misleading Heuristic")
+print("case-2: Misleading Heuristic")
 aStarAlgo('S','G',Graph_nodes,H_dist)
