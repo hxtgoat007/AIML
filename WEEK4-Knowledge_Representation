@@ -21,7 +21,7 @@ def run_test(test_name, kb):
         print("Rain cannot be determined")
 
 # TEST CASES:
-# case-1:
+# case-1(Passed):
 kb1 = (
     Implies(Not(Rain), Harry_Visited_Hagrid) &
     Xor(Harry_Visited_Hagrid, Harry_Visited_Dumbledore) &
@@ -29,31 +29,7 @@ kb1 = (
 )
 run_test("Test case-1: ", kb1)
 
-# case-2:
-kb2 = (
-    Implies(Not(Rain), Harry_Visited_Hagrid) &
-    Xor(Harry_Visited_Hagrid, Harry_Visited_Dumbledore) &
-    Harry_Visited_Hagrid & Not(Rain)
-)
-run_test("Test case-2: ", kb2)
-
-# case-3:
-kb3 = (
-    Implies(Not(Rain), Harry_Visited_Hagrid) &
-    Xor(Harry_Visited_Hagrid, Harry_Visited_Dumbledore) &
-    Harry_Visited_Dumbledore & Rain
-)
-run_test("Test case-3: ", kb3)
-
-# case-4:
-kb4 = (
-    Implies(Not(Rain), Harry_Visited_Hagrid) &
-    Xor(Harry_Visited_Hagrid, Harry_Visited_Dumbledore) &
-    Harry_Visited_Hagrid & Harry_Visited_Dumbledore
-)
-run_test("Test case-4: ", kb4)
-
-# case-5:
+# case-2(Failed):
 kb5 = (
     Implies(Not(Rain), Harry_Visited_Hagrid)
 )
