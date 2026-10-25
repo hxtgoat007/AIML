@@ -54,6 +54,7 @@ Xte = scaler.transform(Xte)
 
 svm2 = SVC(kernel="linear", C=1)
 svm2.fit(Xtr, ytr)
+
 print("\nTest Case 2:")
-print("\nOverlapping classes accuracy:",
+print("Overlapping classes accuracy:",
       svm2.score(Xte, yte))
