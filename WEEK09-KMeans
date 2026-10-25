@@ -3,7 +3,7 @@ from sklearn.cluster import KMeans
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-________________________________________________
+# ________________________________________________
 
 # Load Iris Dataset
 iris = datasets.load_iris()
@@ -13,7 +13,6 @@ X.columns = ['Sepal_Length','Sepal_Width',
              'Petal_Length','Petal_Width']
 
 plt.figure(figsize=(15,10))
-________________________________________________
 
 
 # ----------------------------------
