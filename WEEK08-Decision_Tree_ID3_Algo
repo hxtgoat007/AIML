@@ -2,7 +2,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing 
 import LabelEncoder
 import pandas as pd
-________________________________________
+# ________________________________________
 
 def prepare_data(data):
   df = pd.DataFrame(data)
@@ -17,7 +17,7 @@ def prepare_data(data):
   y = y_encoder.fit_transform(y)
   
   return X, y, y_encoder
-________________________________________
+# ________________________________________
 
 play_tennis = [
   ["Sunny", "Hot", "High", "Weak", "No"],
@@ -35,10 +35,10 @@ play_tennis = [
   ["Overcast", "Hot", "Normal", "Weak", "Yes"],
   ["Rain", "Mild", "High", "Strong", "No"]
 ]
-________________________________________
+# ________________________________________
 
 from sklearn.tree import export_text
-________________________________________
+# ________________________________________
 
 def show_tree(model, feature_names, test_case): 
   print("\n" + "="*50)
@@ -48,7 +48,7 @@ def show_tree(model, feature_names, test_case):
   print("Tree Depth :", model.get_depth())
   print("No. of Leaves :", model.get_n_leaves())
   print()
-________________________________________
+# ________________________________________
 
 # =====================
 # TC 1: Passed
