@@ -24,7 +24,7 @@ def travellingSalesmanProblem(graph, s):
         min_path = min (min_path, current_pathweight)
     return min_path
 
-
+# Test cases:
 # case-1: Small Complete Graph
 print("TEST CASE 1: Small Complete Graph")
 graph1 = [
